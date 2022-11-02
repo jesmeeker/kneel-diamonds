@@ -1,5 +1,4 @@
-import { getOrders, getMetals, getStyles, getSizes, addCustomOrder } from "./database.js"
-import { KneelDiamonds } from "./KneelDiamonds.js"
+import { getOrders, getMetals, getStyles, getSizes, getSettings } from "./database.js"
 
 // const order = addCustomOrder()
 
@@ -7,6 +6,7 @@ export const buildOrderListItem = (order) => {
     const metals = getMetals()
     const styles = getStyles()
     const sizes = getSizes()
+    const settings = getSettings()
 
     // Remember that the function you pass to find() must return true/false
     const foundMetal = metals.find(
@@ -26,7 +26,13 @@ export const buildOrderListItem = (order) => {
         return size.id === order.sizeId
         }
     )
-        const totalCost = foundMetal.price + foundStyle.price + foundSize.price
+
+    const foundSetting = settings.find(
+        (setting) => {
+            return setting.id === order.settingsId
+        }
+    )
+        const totalCost = (foundMetal.price + foundStyle.price + foundSize.price) * foundSetting.multiplier
 
             const costString = totalCost.toLocaleString("en-US", {
                 style: "currency",

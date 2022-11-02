@@ -9,3 +9,8 @@
     box-shadow: 0.25rem 0.25rem 0.5rem rgb(143, 143, 143);
 }
 
+.setting {
+    margin: 1rem 1rem 2rem 2rem;
+    display: inline;
+}
+

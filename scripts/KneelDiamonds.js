@@ -4,6 +4,7 @@ import { JewelryStyles } from "./JewelryStyles.js"
 import { Orders } from "./Orders.js"
 import { Metals } from "./Metals.js"
 import { addCustomOrder } from "./database.js"
+import { Settings } from "./settings.js"
 
 
 document.addEventListener(
@@ -11,7 +12,7 @@ document.addEventListener(
     (event) => {
 
     if (event.target.id === "orderButton") {
-        const order = addCustomOrder()
+        addCustomOrder()
         
         }
     }
@@ -32,6 +33,12 @@ export const KneelDiamonds = () => {
             <section class="choices__styles options">
                 <h2>Styles</h2>${JewelryStyles()}
             </section>
+        </article>
+
+        <article>
+        <section class>
+                ${Settings()}
+        </section>
         </article>
 
         <article>
