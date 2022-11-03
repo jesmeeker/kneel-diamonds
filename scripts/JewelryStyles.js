@@ -1,4 +1,4 @@
-import { getStyles, setStyle } from "./database.js"
+import { getStyles, setStyle, getOrderBuilder } from "./dataAccess.js"
 
 const styles = getStyles()
 
@@ -15,14 +15,27 @@ document.addEventListener(
 )
 
 export const JewelryStyles = () => {
+
+    const selections = getOrderBuilder()
+
+    document.addEventListener("stateChanged", event => {
+        getOrderBuilder()})
+
     let html = "<ul>"
 
     // Use .map() for converting objects to <li> elements
-    const listItems = styles.map(style => {
-        return `<li>
-            <input type="radio" name="style" value="${style.id}" /> ${style.style}
+    let listItems = styles.map(style => {
+
+        if (style.id === selections.styleId) {
+            return `<li>
+                <input type="radio" name="style" value="${style.id}" checked /> ${style.style}
+            </li>`
+        } else {
+            return `<li>
+                <input type="radio" name="style" value="${style.id}" /> ${style.style}
         </li>`
-    })
+        }})
+        
 
     html += listItems.join("")
     html += "</ul>"

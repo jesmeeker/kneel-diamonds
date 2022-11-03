@@ -1,4 +1,4 @@
-import { getSettings, setSetting } from "./database.js"
+import { getSettings, setSetting, getOrderBuilder } from "./dataAccess.js"
 
 const settings = getSettings()
 
@@ -13,16 +13,30 @@ document.addEventListener(
 )
 
 export const Settings = () => {
-    let html = `<ul>`
 
-    // This is how you have been converting objects to <li> elements
-    const settingItems = settings.map(settings => {
-        return `<li class="setting">
-            <input type="radio" name="setting" value="${settings.id}"/> ${settings.name}
+    const selections = getOrderBuilder()
+
+    document.addEventListener("stateChanged", event => {
+        getOrderBuilder()})
+    
+            
+    let html = "<ul>"
+            
+    let listItems = settings.map(setting => {
+
+        if (setting.id === selections.settingId) {
+            return `<li class="setting">
+                <input type="radio" name="setting" value="${setting.id}" checked /> ${setting.name}
+            </li>`
+        } else {
+            return `<li class="setting">
+                <input type="radio" name="setting" value="${setting.id}" /> ${setting.name}
         </li>`
-    })
+        }})
 
-    html += settingItems.join("")
+    html += listItems.join("")
     html += "</ul>"
+    
     return html
 }
+

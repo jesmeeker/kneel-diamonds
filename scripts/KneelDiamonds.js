@@ -3,7 +3,7 @@ import { DiamondSizes } from "./DiamondSizes.js"
 import { JewelryStyles } from "./JewelryStyles.js"
 import { Orders } from "./Orders.js"
 import { Metals } from "./Metals.js"
-import { addCustomOrder } from "./database.js"
+import { addCustomOrder, setMetal } from "./dataAccess.js"
 import { Settings } from "./settings.js"
 
 
@@ -17,6 +17,12 @@ document.addEventListener(
         }
     }
 )
+
+document.addEventListener("metalChanged", (event) => {
+    if (event.target.name === "metal") {
+    console.log("State of metal has changed. Regenerating HTML...")
+    setMetal(parseInt(event.target.id))}
+})
 
 export const KneelDiamonds = () => {
 
@@ -36,7 +42,7 @@ export const KneelDiamonds = () => {
         </article>
 
         <article>
-        <section class>
+        <section>
                 ${Settings()}
         </section>
         </article>

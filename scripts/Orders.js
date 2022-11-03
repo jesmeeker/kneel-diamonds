@@ -1,4 +1,4 @@
-import { getOrders, getMetals, getStyles, getSizes, getSettings } from "./database.js"
+import { getOrders, getMetals, getStyles, getSizes, getSettings } from "./dataAccess.js"
 
 // const order = addCustomOrder()
 
@@ -29,7 +29,7 @@ export const buildOrderListItem = (order) => {
 
     const foundSetting = settings.find(
         (setting) => {
-            return setting.id === order.settingsId
+            return setting.id === order.settingId
         }
     )
         const totalCost = (foundMetal.price + foundStyle.price + foundSize.price) * foundSetting.multiplier
